@@ -22,9 +22,37 @@ class ChallengeController extends Controller
         return view('dashboard.login');
     }
 
+    public function userData()
+    {
+        $items= user::all();
+        return view('dashboard.data', compact('items'));
+        
+
+    }
+
+    public function error()
+    {
+        return view('dashboard.error');
+    }
+
     public function register()
     {
         return view('dashboard.register');
+    }
+
+    // public function user()
+    // {
+    //    $items= user::all();
+    //     return view('dashboard.data', compact('items'));
+    // }
+
+    public function updateProfile(){
+        return view('dashboard.upload-profile');
+    }
+
+    public function profile(){
+        $user=User::where('id', Auth::user()->id)->first();
+        return view('dashboard.profile', compact('user'));
     }
 
     public function inputRegister(Request$request)
@@ -41,6 +69,7 @@ class ChallengeController extends Controller
             'email'=> $request->email,
             'password'=>Hash::make($request->password),
             'username'=>$request->username,
+            'role'=> 'user',
         ]);
 
         return redirect('/')->with('succes', 'Anda berhasil membuat akun');

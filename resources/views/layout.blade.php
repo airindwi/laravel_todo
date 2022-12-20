@@ -18,7 +18,10 @@
   <div class="container-fluid">
     <a class="navbar-brand">Todo App</a>
     <form class="d-flex" role="search">
-    <p class=p-2>{{Auth::user()->name}}</p>
+      @if(Auth::user()->role == 'admin')
+      <a href="/todo/data">Users</a>
+      @endif
+    <a class=p-2 href="/todo/profile">{{Auth::user()->name}}</a>
       <a class="btn btn-dark" href="/logout">Logout</a>
     </form>
   </div>
